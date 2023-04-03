@@ -1,0 +1,884 @@
+﻿<Window
+	x:Class="RETASK.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:RETASK"
+    xmlns:fa="http://schemas.fontawesome.com/icons/svg"
+    xmlns:fa2="http://schemas.fontawesome.com/icons/svg/properties"
+	Name="MainWindowGUI"
+	Title="MainWindowGUI"
+	Height="450"
+	Width="734"
+	ResizeMode="CanMinimize"
+	WindowStartupLocation="CenterScreen"
+	WindowStyle="None"
+	AllowsTransparency="True"
+	HorizontalAlignment="Stretch"
+	Background="{x:Null}">
+    <FrameworkElement.Resources>
+        <ResourceDictionary>
+            <Style
+				TargetType="{x:Type TextBox}"
+				x:Key="{x:Type TextBox}">
+                <Style.Resources>
+                    <ResourceDictionary>
+                        <Style
+							TargetType="{x:Type Border}"
+							x:Key="{x:Type Border}">
+                            <Setter
+								Property="Border.CornerRadius"
+								Value="8" />
+                            <Setter
+								Property="BorderThickness"
+								Value="0" />
+                        </Style>
+                    </ResourceDictionary>
+                </Style.Resources>
+            </Style>
+        </ResourceDictionary>
+    </FrameworkElement.Resources>
+    <Border
+		Name="windowFrame"
+		BorderThickness="2,2,2,2"
+		CornerRadius="8,8,8,8"
+		HorizontalAlignment="Center"
+		Width="734"
+		BorderBrush="#FFE66F24"
+		Background="#FFFFFFFF">
+        <Grid
+			RenderTransformOrigin="0.5,0.5"
+			HorizontalAlignment="Center"
+			Width="734">
+            <Rectangle
+				Height="450"
+				VerticalAlignment="Center"
+				RadiusX="9.5"
+				RadiusY="9.5"
+				Fill="#FFE66F24"
+				HorizontalAlignment="Left"
+				Width="57" />
+            <Rectangle
+				Height="450"
+				VerticalAlignment="Center"
+				Fill="#FFE66F24"
+				Margin="52,0,0,0"
+				HorizontalAlignment="Left"
+				Width="7" />
+            <Rectangle
+				Fill="#00FFFFFF"
+				VerticalAlignment="Top"
+				Height="40"
+				MouseDown="Rectangle_MouseDown" />
+            <Rectangle
+				Fill="#FFB1B1B1"
+				VerticalAlignment="Top"
+				Height="1"
+				Margin="59,35,0,0"
+				MouseDown="Rectangle_MouseDown" />
+            <Grid
+				Margin="703,0,15,424"
+				Height="16"
+				VerticalAlignment="Bottom">
+                <Rectangle
+					Name="CloseButton"
+					Fill="#FFFFFFFF"
+					MouseDown="CloseButton_MouseDown"
+					MouseEnter="windowbutton_MouseEnter"
+					MouseLeave="windowbutton_MouseLeave" />
+                <Rectangle
+					Name="CloseRectangle1"
+					Fill="#FF3E3E3E"
+					Height="1.5"
+					RenderTransformOrigin="0.5,0.5"
+					RadiusX="0.5"
+					RadiusY="0.5"
+					HorizontalAlignment="Center"
+					Width="16"
+					VerticalAlignment="Center"
+					IsHitTestVisible="False">
+                    <UIElement.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform
+								Angle="45" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </UIElement.RenderTransform>
+                </Rectangle>
+                <Rectangle
+					Name="CloseRectangle2"
+					HorizontalAlignment="Center"
+					Height="1.5"
+					VerticalAlignment="Center"
+					Width="16"
+					Fill="#FF3E3E3E"
+					RenderTransformOrigin="0.5,0.5"
+					RadiusX="0.5"
+					RadiusY="0.5"
+					IsHitTestVisible="False">
+                    <UIElement.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform
+								Angle="-45" />
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </UIElement.RenderTransform>
+                </Rectangle>
+            </Grid>
+            <Grid
+				Margin="672,0,46,424"
+				Height="16"
+				VerticalAlignment="Bottom">
+                <Rectangle
+					Name="MinimizeButton"
+					Fill="#FFFFFFFF"
+					MouseDown="MinimizeButton_MouseDown"
+					MouseEnter="windowbutton_MouseEnter"
+					MouseLeave="windowbutton_MouseLeave" />
+                <Rectangle
+					Name="MinimizeRectangle1"
+					Fill="#FF3E3E3E"
+					Height="1.5"
+					RenderTransformOrigin="0.5,0.5"
+					RadiusX="0.5"
+					RadiusY="0.5"
+					HorizontalAlignment="Center"
+					Width="14"
+					VerticalAlignment="Top"
+					Margin="0,7,0,0"
+					IsHitTestVisible="False" />
+            </Grid>
+            <Label
+				Content="RETASK"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"
+				Foreground="#FFFFFFFF"
+				FontWeight="SemiBold"
+				FontSize="14"
+				Height="33"
+				Width="57"
+				HorizontalContentAlignment="Center"
+				VerticalContentAlignment="Center" />
+            <Grid
+				Margin="0,47,677,362">
+                <Rectangle
+					Name="HomeButton"
+					HorizontalAlignment="Center"
+					Width="57"
+					Fill="#FF424D88"
+					Height="41"
+					VerticalAlignment="Top"
+					MouseEnter="sidebutton_MouseEnter"
+					MouseLeave="sidebutton_MouseLeave"
+					MouseDown="sidebutton_MouseDown" />
+                <fa:SvgAwesome
+					Icon="Solid_HouseChimney"
+					PrimaryColor="#FFF5F5F5"
+					Margin="6,6,6,6"
+					IsHitTestVisible="False" />
+            </Grid>
+            <Grid
+				Margin="0,93,677,316">
+                <Rectangle
+					Name="AddButton"
+					HorizontalAlignment="Left"
+					Width="57"
+					Fill="#FFE66F24"
+					VerticalAlignment="Top"
+					Height="41"
+					MouseEnter="sidebutton_MouseEnter"
+					MouseLeave="sidebutton_MouseLeave"
+					MouseDown="sidebutton_MouseDown" />
+                <fa:SvgAwesome
+					Icon="Solid_Plus"
+					PrimaryColor="#FFF5F5F5"
+					IsHitTestVisible="False" />
+            </Grid>
+            <Grid
+				Margin="0,139,677,270">
+                <Rectangle
+					Name="StatsButton"
+					HorizontalAlignment="Center"
+					Width="57"
+					Fill="#FFE66F24"
+					Height="41"
+					VerticalAlignment="Top"
+					MouseEnter="sidebutton_MouseEnter"
+					MouseLeave="sidebutton_MouseLeave"
+					MouseDown="sidebutton_MouseDown" />
+                <fa:SvgAwesome
+					Icon="Solid_ChartSimple"
+					PrimaryColor="#66FFFFFF"
+					Margin="6,6,6,6"
+					IsHitTestVisible="False"
+					RenderTransformOrigin="0.718,0.5" />
+            </Grid>
+            <Grid
+				Margin="0,185,677,224">
+                <Rectangle
+					Name="DeleteButton"
+					HorizontalAlignment="Center"
+					Width="57"
+					Fill="#FFE66F24"
+					Height="41"
+					VerticalAlignment="Top"
+					MouseEnter="sidebutton_MouseEnter"
+					MouseLeave="sidebutton_MouseLeave"
+					MouseDown="sidebutton_MouseDown" />
+                <fa:SvgAwesome
+					Icon="Solid_TrashCan"
+					PrimaryColor="#FFF5F5F5"
+					Margin="6,6,6,6"
+					IsHitTestVisible="False" />
+            </Grid>
+            <ScrollViewer
+				Name="HomeContainerScroll"
+				VerticalScrollBarVisibility="Auto"
+				Margin="59,38,0,10"
+				Visibility="Visible">
+                <WrapPanel
+					Name="HomeContainer" />
+            </ScrollViewer>
+            <fa:SvgAwesome
+				Name="TodaySwitchIcon"
+				Icon="Solid_Repeat"
+				PrimaryColor="#FFE66F24"
+				Margin="693,402,10,8"
+				IsHitTestVisible="False" />
+            <Rectangle
+				Name="TodaySwitchButton"
+				Fill="#00FFFFFF"
+				Margin="693,402,10,8"
+				ToolTip="Show only today tasks"
+				MouseDown="TodaySwitch" />
+            <Grid
+				Name="AddContainer"
+				Margin="59,33,0,0"
+				Background="#FFFFFFFF"
+				Visibility="Hidden"
+				MouseDown="AddContainer_MouseDown">
+                <Grid
+					Margin="27,8,305,8">
+                    <Rectangle
+						HorizontalAlignment="Left"
+						Height="397"
+						VerticalAlignment="Center"
+						Width="343"
+						Fill="#FFF3F3F3"
+						RadiusX="6"
+						RadiusY="6" />
+                    <TextBox
+						Name="Description"
+						HorizontalAlignment="Left"
+						Height="34"
+						Margin="22,140,0,0"
+						TextWrapping="Wrap"
+						VerticalAlignment="Top"
+						Width="302"
+						FontSize="16"
+						TextAlignment="Center"
+						Background="#FFFFFFFF"
+						VerticalContentAlignment="Center"
+						MaxLength="25"
+						TextChanged="Description_TextChanged" />
+                    <Label
+						Name="TEXT1"
+						Content="Add Task"
+						HorizontalAlignment="Left"
+						Margin="22,16,0,0"
+						VerticalAlignment="Top"
+						FontSize="22"
+						FontWeight="SemiBold" />
+                    <Label
+						Name="TEXT2"
+						Content="Achieve your goals systematically"
+						HorizontalAlignment="Left"
+						Margin="22,60,0,0"
+						VerticalAlignment="Top"
+						Width="258"
+						Foreground="#FFA0A0A0"
+						Background="{x:Null}" />
+                    <Label
+						Name="TEXT3"
+						Content="Name your task"
+						HorizontalAlignment="Left"
+						Margin="22,96,0,0"
+						VerticalAlignment="Top"
+						FontSize="16"
+						FontWeight="DemiBold" />
+                    <Label
+						Name="TEXT4"
+						Content="Weekly frequency"
+						HorizontalAlignment="Left"
+						Margin="22,189,0,0"
+						VerticalAlignment="Top"
+						FontSize="16"
+						FontWeight="DemiBold" />
+                    <Rectangle
+						Name="Mon"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="22,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT5"
+						Content="Mon"
+						HorizontalAlignment="Left"
+						Margin="22,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Rectangle
+						Name="Tue"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="66,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT6"
+						Content="Tue"
+						HorizontalAlignment="Left"
+						Margin="66,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Rectangle
+						Name="Wed"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="110,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT7"
+						Content="Wed"
+						HorizontalAlignment="Left"
+						Margin="110,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Rectangle
+						Name="Thu"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="154,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT8"
+						Content="Thu"
+						HorizontalAlignment="Left"
+						Margin="154,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Rectangle
+						Name="Fri"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="198,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT9"
+						Content="Fri"
+						HorizontalAlignment="Left"
+						Margin="198,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Rectangle
+						Name="Sat"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="242,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT10"
+						Content="Sat"
+						HorizontalAlignment="Left"
+						Margin="242,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Rectangle
+						Name="Sun"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="286,226,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="39"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFFFFFF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="day_MouseDown" />
+                    <Label
+						Name="TEXT11"
+						Content="Sun"
+						HorizontalAlignment="Left"
+						Margin="286,226,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="39"
+						Foreground="#FFABADB3"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						IsHitTestVisible="False" />
+                    <Label
+						Name="TEXT12"
+						Content="Task color"
+						HorizontalAlignment="Left"
+						Margin="22,271,0,0"
+						VerticalAlignment="Top"
+						FontSize="16"
+						FontWeight="DemiBold" />
+                    <Rectangle
+						Name="Color1"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="22,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="38"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF008369"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color2"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="66,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="38"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF006798"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color3"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="110,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="38"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF92584A"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color4"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="154,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFFF7500"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color5"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="198,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF219040"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color6"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="242,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFF9281C"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color7"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="286,302,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF8A3B3B"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color8"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="22,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="38"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFA652BB"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color9"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="66,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="38"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFF93A2F"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color10"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="110,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="38"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF31A1AF"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color11"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="154,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFBC0057"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color12"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="198,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FFC3A000"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color13"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="242,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF9874A4"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="Color14"
+						HorizontalAlignment="Left"
+						Height="39"
+						Margin="286,346,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="40"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF1D5469"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave"
+						MouseDown="colorbutton_MouseDown" />
+                    <Rectangle
+						Name="SaveTaskButton"
+						HorizontalAlignment="Left"
+						Height="40"
+						Margin="260,16,0,0"
+						Stroke="#FFABADB3"
+						VerticalAlignment="Top"
+						Width="73"
+						RadiusX="8"
+						RadiusY="8"
+						Fill="#FF219040"
+						MouseDown="SaveTaskButton_MouseDown"
+						MouseEnter="buttons_MouseEnter"
+						MouseLeave="buttons_MouseLeave" />
+                    <Label
+						Name="TEXT14"
+						Content="Save Task"
+						HorizontalAlignment="Left"
+						Margin="260,16,0,0"
+						VerticalAlignment="Top"
+						Height="38"
+						Width="73"
+						Foreground="#FFFFFFFF"
+						VerticalContentAlignment="Center"
+						HorizontalContentAlignment="Center"
+						FontWeight="Bold"
+						IsHitTestVisible="False" />
+                </Grid>
+                <Canvas
+					Name="TaskExample"
+					Height="168"
+					Width="284"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Background="#FF219040"
+					Margin="383,117,0,0">
+                    <Rectangle
+						Height="33"
+						Width="33"
+						Canvas.Left="248"
+						Canvas.Top="3"
+						RadiusX="360"
+						RadiusY="360"
+						Fill="#00FFFFFF"
+						MouseEnter="DoneButton_MouseEnter"
+						MouseLeave="DoneButton_MouseLeave" />
+                    <fa:SvgAwesome
+						Icon="Solid_CircleCheck"
+						PrimaryColor="#FFF5F5F5"
+						IsHitTestVisible="False"
+						Height="29"
+						Width="29"
+						Canvas.Left="250"
+						Canvas.Top="5"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Center" />
+                    <Label
+						Name="NameExample"
+						Content="Name of Task"
+						Canvas.Left="10"
+						Canvas.Top="41"
+						FontSize="18"
+						Foreground="#FFFFFFFF"
+						HorizontalAlignment="Center"
+						VerticalAlignment="Top"
+						Width="264"
+						HorizontalContentAlignment="Center"
+						Height="86"
+						VerticalContentAlignment="Center" />
+                    <Label
+						Name="DayExample"
+						Content="Mon Tue Wed Thu Fri Sat Sun"
+						Canvas.Left="10"
+						Canvas.Top="132"
+						Foreground="#FFE4E4E4"
+						HorizontalAlignment="Left"
+						VerticalAlignment="Center"
+						Width="264" />
+                </Canvas>
+            </Grid>
+            <Grid
+				Name="StatsContainer"
+				Margin="59,33,0,0"
+				Visibility="Hidden">
+                <Button
+					Content="Button"
+					Canvas.Left="256"
+					Canvas.Top="150" />
+                <Button
+					Content="Button"
+					Canvas.Left="258"
+					Canvas.Top="144" />
+            </Grid>
+            <ScrollViewer
+				Name="DeleteContainerScroll"
+				VerticalScrollBarVisibility="Auto"
+				Margin="59,38,0,10"
+				Visibility="Hidden">
+                <WrapPanel
+					Name="DeleteContainer"
+					Visibility="Hidden"
+					MouseDown="DeleteContainer_MouseDown" />
+            </ScrollViewer>
+            <fa:SvgAwesome
+				Icon="Solid_Gear"
+				PrimaryColor="#FFF5F5F5"
+				Margin="6,411,683,10"
+				IsHitTestVisible="False"
+				MouseDown="SettingsButton_MouseDown" />
+            <Rectangle
+				Name="SettingsButton"
+				Margin="6,411,683,10"
+				Fill="#00000000"
+				Width="57"
+				MouseDown="SettingsButton_MouseDown" />
+            <Canvas
+				Name="Settings"
+				Margin="10,337,614,48"
+				Visibility="Hidden">
+                <Rectangle
+					Fill="#FFFFFFFF"
+					Stroke="#FFE66F24"
+					RadiusX="8"
+					RadiusY="8"
+					StrokeThickness="5"
+					Height="63"
+					Width="110">
+                    <UIElement.Effect>
+                        <DropShadowEffect
+							Opacity="0.5"
+							Direction="220" />
+                    </UIElement.Effect>
+                </Rectangle>
+                <Rectangle
+					Name="EN"
+					HorizontalAlignment="Left"
+					Height="42"
+					Stroke="#FFD2D2D2"
+					VerticalAlignment="Top"
+					Width="42"
+					RadiusX="8"
+					RadiusY="8"
+					Canvas.Left="10"
+					Canvas.Top="11"
+					StrokeThickness="2"
+					MouseEnter="buttons_MouseEnter"
+					MouseLeave="buttons_MouseLeave"
+					MouseDown="EN_MouseDown">
+                    <Shape.Fill>
+                        <ImageBrush
+							ImageSource="/Resources/EN.png" />
+                    </Shape.Fill>
+                </Rectangle>
+                <Rectangle
+					Name="EN_Copy"
+					Height="42"
+					Stroke="#FFD2D2D2"
+					Width="42"
+					RadiusX="8"
+					RadiusY="8"
+					Canvas.Left="57"
+					Canvas.Top="11"
+					StrokeThickness="2"
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					MouseEnter="buttons_MouseEnter"
+					MouseLeave="buttons_MouseLeave"
+					MouseDown="RU_MouseDown">
+                    <Shape.Fill>
+                        <ImageBrush
+							ImageSource="/Resources/RU.png" />
+                    </Shape.Fill>
+                </Rectangle>
+            </Canvas>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\EN.png" />
+    <None Remove="Resources\RU.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FontAwesome6.Svg" Version="2.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\EN.png" />
+    <Resource Include="Resources\RU.png" />
+  </ItemGroup>
+
+</Project>
