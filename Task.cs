@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using FontAwesome6;
 using FontAwesome6.Svg;
 using Newtonsoft.Json;
@@ -113,6 +115,8 @@ namespace RETASK
 
         private void TaskUICreate(WrapPanel wrapPanel, string name, Dictionary<string, bool> days, string selectedcolor, string operation)
         {
+            var tasks = ReadJson();
+
             Rectangle donerectangle = new Rectangle();
             donerectangle.Height = 33.0;
             donerectangle.Width = 33.0;
@@ -196,9 +200,13 @@ namespace RETASK
                     string name = (string)tasks[i]["name"];
                     JObject days = tasks[i]["days"] as JObject;
                     Dictionary<string, bool> days_object = days.ToObject<Dictionary<string, bool>>();
-                    //Dictionary<string, bool> days = (Dictionary<string, bool>)tasks[i]["days"];
                     TaskUICreate(wrapPanel, name, days_object, selectedcolor, operation);
-                }
+                    if (operation == "Create")
+                    {
+                        bool complete = (bool)tasks[i]["complete"];
+                        if (complete) wrapPanel.Children[i].Visibility = Visibility.Collapsed;
+                    }
+                }         
             }
         }
     }

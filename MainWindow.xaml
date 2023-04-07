@@ -6,7 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:RETASK"
     xmlns:fa="http://schemas.fontawesome.com/icons/svg"
-    xmlns:fa2="http://schemas.fontawesome.com/icons/svg/properties"
 	Name="MainWindowGUI"
 	Title="MainWindowGUI"
 	Height="450"
@@ -70,12 +69,6 @@
 				Fill="#00FFFFFF"
 				VerticalAlignment="Top"
 				Height="40"
-				MouseDown="Rectangle_MouseDown" />
-            <Rectangle
-				Fill="#FFB1B1B1"
-				VerticalAlignment="Top"
-				Height="1"
-				Margin="59,35,0,0"
 				MouseDown="Rectangle_MouseDown" />
             <Grid
 				Margin="703,0,15,424"
@@ -236,13 +229,13 @@
 					Margin="6,6,6,6"
 					IsHitTestVisible="False" />
             </Grid>
+            
             <ScrollViewer
 				Name="HomeContainerScroll"
 				VerticalScrollBarVisibility="Auto"
 				Margin="59,38,0,10"
 				Visibility="Visible">
-                <WrapPanel
-					Name="HomeContainer" />
+                <WrapPanel Name="HomeContainer" />
             </ScrollViewer>
             <fa:SvgAwesome
 				Name="TodaySwitchIcon"
@@ -820,6 +813,7 @@
 				Fill="#00000000"
 				Width="57"
 				MouseDown="SettingsButton_MouseDown" />
+            <Label x:Name="NoTasks" Content="There is no Tasks" Margin="162,135,104,135" FontSize="48" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="#FFB7B7B7" Visibility="Hidden"/>
             <Canvas
 				Name="Settings"
 				Margin="10,337,614,48"

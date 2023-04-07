@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 
@@ -24,7 +27,7 @@ namespace RETASK
             Sat.Fill =  white;
             Sun.Fill =  white;
             WorkWithTasks task = new WorkWithTasks();
-            task.updateTasks( HomeContainer);
+            task.updateTasks(HomeContainer);
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += (sender, e) =>
             {
@@ -32,6 +35,7 @@ namespace RETASK
             };
             timer.Interval = TimeSpan.FromHours(1);
             timer.Start();
+            HomeContainer.LayoutUpdated += Container_LayoutUpdated;
         }
         Brush
             orange = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFE66F24"),
@@ -40,10 +44,35 @@ namespace RETASK
             black = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF000000"),
             gray = (SolidColorBrush)new BrushConverter().ConvertFrom("#FF3E3E3E"),
             lightgray = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFABADB3"),
-            ultralightgray = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFFFFFFF"),
+            ultralightgray = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFE2E2E2"),
             white = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFFFFFFF"),
             transparent = (SolidColorBrush)new BrushConverter().ConvertFrom("#00FFFFFF"),
             hoverblue = (SolidColorBrush)new BrushConverter().ConvertFrom("#7eb4ea");
+
+
+        private void Container_LayoutUpdated(object sender, EventArgs e)
+        {
+            WrapPanel container = HomeContainer;
+            if (HomeContainer.Visibility == Visibility.Visible) container = HomeContainer;
+            else if (DeleteContainer.Visibility == Visibility.Visible) container = DeleteContainer;
+            else goto breakk;
+
+            if (container.Children.Count == 0) NoTasks.Visibility = Visibility.Visible;
+            else
+            {
+                NoTasks.Visibility = Visibility.Hidden;
+                for (int i = 0; i < container.Children.Count; i++)
+                {
+                    UIElement child = VisualTreeHelper.GetChild(container, i) as UIElement;
+                    if (child != null && child.Visibility != Visibility.Visible)
+                    {
+                        NoTasks.Visibility = Visibility.Visible;
+                        break;
+                    }
+                }
+            }
+        breakk:;
+        }
 
         private void HideContainers()
         {
@@ -67,7 +96,7 @@ namespace RETASK
             Canvas clickedObject = e.Source as Canvas;
             WrapPanel wrapPanel = clickedObject.Parent as WrapPanel;
             int index = wrapPanel.Children.IndexOf(clickedObject);
-             task.DeleteTask(clickedObject, index);
+            task.DeleteTask(clickedObject, index);
         }
 
         private void TodaySwitch(object sender, MouseButtonEventArgs e)
@@ -75,13 +104,13 @@ namespace RETASK
             WorkWithTasks task = new WorkWithTasks();
             if (TodaySwitchIcon.PrimaryColor == orange)
             {
-                 TodaySwitchIcon.PrimaryColor =  ultralightgray;
-                 task.LoadTasks( HomeContainer, "Delete");
+                TodaySwitchIcon.PrimaryColor =  ultralightgray;
+                task.LoadTasks( HomeContainer, "Delete");
             }
             else
             {
-                 TodaySwitchIcon.PrimaryColor =  orange;
-                 task.updateTasks( HomeContainer);
+                TodaySwitchIcon.PrimaryColor =  orange;
+                task.updateTasks( HomeContainer);
             }
         }
 
@@ -108,6 +137,7 @@ namespace RETASK
                     AddContainer.Visibility = Visibility.Visible;
                     AddButton.Fill = blue;
                     Description.Text = "";
+                    NoTasks.Visibility = Visibility.Hidden;
                     break;
                 case "DeleteButton":
                     HideContainers();
@@ -161,7 +191,7 @@ namespace RETASK
             }
         }
 
-                string selectedcolor = "#FF219040";
+        string selectedcolor = "#FF219040";
         private Dictionary<string, bool> days = new Dictionary<string, bool>
         {
             { "Mon", false },
@@ -181,6 +211,8 @@ namespace RETASK
              HomeContainer.Visibility = Visibility.Visible;
              HomeContainerScroll.Visibility = Visibility.Visible;
              HomeButton.Fill =  blue;
+            TodaySwitchButton.Visibility = Visibility.Visible;
+            TodaySwitchIcon.Visibility = Visibility.Visible;
         }
 
         private void colorbutton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -197,15 +229,15 @@ namespace RETASK
 
         private void AddContainer_MouseDown(object sender, MouseButtonEventArgs e)
         {
-             TaskExample.Background = (SolidColorBrush)new BrushConverter().ConvertFrom( selectedcolor);
-             NameExample.Content =  Description.Text;
-             DayExample.Content = "";
+            TaskExample.Background = (SolidColorBrush)new BrushConverter().ConvertFrom( selectedcolor);
+            NameExample.Content =  Description.Text;
+            DayExample.Content = "";
             foreach (KeyValuePair<string, bool> day in  days)
             {
                 bool value = day.Value;
                 if (value)
                 {
-                    Label dayExample =  DayExample;
+                    System.Windows.Controls.Label dayExample =  DayExample;
                     object content = dayExample.Content;
                     dayExample.Content = ((content != null) ? content.ToString() : null) + " " + day.Key;
                 }
@@ -281,8 +313,8 @@ namespace RETASK
         private void day_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Rectangle btn = (Rectangle)sender;
-            bool flag = btn.Fill == white;
-            btn.Fill = ultralightgray;
+            if(btn.Fill == white) btn.Fill = ultralightgray;
+            else btn.Fill = white;
             string name = btn.Name;
             if (days.ContainsKey(name))
             {
