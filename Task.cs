@@ -20,22 +20,12 @@ namespace RETASK
 
         static List<Dictionary<string, object>> ReadJson()
         {
+            File.AppendAllText("tasks.json", "");
             string text = File.ReadAllText("tasks.json");
-            if (File.Exists("tasks.json") && text.Length >= 2)
-            {
-                List<Dictionary<string, object>> tasks = new List<Dictionary<string, object>>();
-                string json = File.ReadAllText("tasks.json");
-                tasks = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
-                return tasks;
-            }
-            else
-            {
-                List<Dictionary<string, object>> tasks = new List<Dictionary<string, object>>();
-                File.WriteAllText("tasks.json", "[]");
-                string json = File.ReadAllText("tasks.json");
-                tasks = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
-                return tasks;
-            }
+            List<Dictionary<string, object>> tasks = new List<Dictionary<string, object>>();
+            string json = File.ReadAllText("tasks.json");
+            tasks = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(json);
+            return tasks;
         }
 
 
