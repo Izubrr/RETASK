@@ -69,6 +69,7 @@ namespace RETASK
                         NoTasks.Visibility = Visibility.Visible;
                         break;
                     }
+                    else NoTasks.Visibility = Visibility.Hidden;
                 }
             }
         breakk:;
@@ -258,6 +259,7 @@ namespace RETASK
             TEXT10.Content = "Sat";
             TEXT11.Content = "Sun";
             TEXT12.Content = "Task color";
+            NoTasks.Content = "There is no Tasks";
             Settings.Visibility = Visibility.Hidden;
         }
 
@@ -275,6 +277,7 @@ namespace RETASK
             TEXT10.Content = "Сб";
             TEXT11.Content = "Вс";
             TEXT12.Content = "Цвет задачи";
+            NoTasks.Content = "Список задач пуст";
             Settings.Visibility = Visibility.Hidden;
         }
 
