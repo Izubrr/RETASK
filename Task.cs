@@ -182,7 +182,7 @@ namespace RETASK
             var tasks = ReadJson();
             wrapPanel.Children.Clear();
             string todayStr = DateTime.Today.DayOfWeek.ToString().Substring(0, 3);
-            if (tasks.Count > 0)
+            if (tasks != null && tasks.Count > 0)
             {
                 for (int i = 0; i < tasks.Count; i++)
                 {
