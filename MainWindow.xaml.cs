@@ -64,12 +64,11 @@ namespace RETASK
                 for (int i = 0; i < container.Children.Count; i++)
                 {
                     UIElement child = VisualTreeHelper.GetChild(container, i) as UIElement;
-                    if (child != null && child.Visibility != Visibility.Visible)
+                    if (child != null && child.Visibility == Visibility.Visible)
                     {
-                        NoTasks.Visibility = Visibility.Visible;
-                        break;
+                        NoTasks.Visibility = Visibility.Hidden;
                     }
-                    else NoTasks.Visibility = Visibility.Hidden;
+                    else NoTasks.Visibility = Visibility.Visible;
                 }
             }
         breakk:;
